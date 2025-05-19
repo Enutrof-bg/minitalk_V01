@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "minitalk.h"
 
 // int ft_power(int n, int power)
 // {
@@ -73,6 +72,11 @@ void ft_test(int *n)
 	printf("%d\n", *n);
 }
 
+void ft_putchar(int c)
+{
+	write(1, &c, 1);
+}
+
 int main()
 {
 	// printf("%d\n", 1 % 128);
@@ -84,14 +88,6 @@ int main()
 	// printf("%s\n", test2);
 	// free(test2);
 
-	int count;
-	int *ptrcount;
-
-	count = 0;
-	ptrcount = &count;
-
-	ft_test(ptrcount);
-	ft_test(ptrcount);
-	ft_test(ptrcount);
-	ft_test(ptrcount);
+	ft_putchar(106);
+	// write(1, &106, 1);
 }

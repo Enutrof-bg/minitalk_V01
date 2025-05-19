@@ -27,7 +27,7 @@ char *ft_call_bit(unsigned char c)
 	int i;
 
 	i = 0;
-	bit = malloc(sizeof(char) * (8));
+	bit = malloc(sizeof(char) * (8 + 1));
 	while (i < 8)
 	{
 		bit[i] = '0';
@@ -71,6 +71,7 @@ void ft_send_signal(pid_t pid, char *str)
 int main(int argc, char **argv)
 {
 	pid_t pidserver = 0;
+	char *bit;
 	// int i = 0;
 	// int killtest = 0;
 	// printf("%d\n", ft_power(2, 8));
@@ -79,7 +80,9 @@ int main(int argc, char **argv)
 		pidserver = ft_atoi(argv[1]);
 		printf("%d\n", pidserver);
 		// while (argv[2])
-		ft_send_signal(pidserver, ft_call_bit('j'));
+		bit = ft_call_bit('j');
+		ft_send_signal(pidserver, bit);
+		free(bit);
 		// killtest = kill(pidserver, SIGUSR1);
 		// if (killtest == 0)
 		// 	printf("Signal sent.");

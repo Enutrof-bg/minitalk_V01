@@ -12,6 +12,11 @@
 
 #include "minitalk.h"
 
+void ft_putchar(int c)
+{
+	write(1, &c, 1);
+}
+
 int	ft_atoi(const char *str)
 {
 	int	i;
@@ -37,3 +42,19 @@ int	ft_atoi(const char *str)
 	return (result * signe);
 }
 
+int ft_power(int nb, int power)
+{
+	int result;
+
+	result = 1;
+	if (power < 0)
+		return (0);
+	if (nb == 0 && power == 0)
+		return (1);
+	while (power >= 1)
+	{
+		result = result * nb;
+		power--;
+	}
+	return (result);
+}

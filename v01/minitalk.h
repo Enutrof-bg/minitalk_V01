@@ -19,5 +19,7 @@
 #include <stdlib.h> //malloc etc
 
 int	ft_atoi(const char *str);
+int ft_power(int nb, int power);
+void ft_putchar(int c);
 
 #endif
