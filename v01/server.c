@@ -25,7 +25,13 @@ void	signal_term(int signum)
 
 void ft_print(int signum)
 {
+	int count;
+	int *ptrcount;
+
+	count = 0;
+	ptrcount = &count;
 	printf("signum :%d\n", signum);
+
 }
 
 int main()

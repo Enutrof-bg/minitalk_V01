@@ -67,6 +67,12 @@ char *ft_call_bit(unsigned char c)
 	return (bit);
 }
 
+void ft_test(int *n)
+{
+	n = n + 1;
+	printf("%d\n", *n);
+}
+
 int main()
 {
 	// printf("%d\n", 1 % 128);
@@ -74,7 +80,18 @@ int main()
 	// printf("resultat : %s\n\n\n", test);
 	// free(test);
 	
-	char *test2 = ft_call_bit(127);
-	printf("%s\n", test2);
-	free(test2);
+	// char *test2 = ft_call_bit(127);
+	// printf("%s\n", test2);
+	// free(test2);
+
+	int count;
+	int *ptrcount;
+
+	count = 0;
+	ptrcount = &count;
+
+	ft_test(ptrcount);
+	ft_test(ptrcount);
+	ft_test(ptrcount);
+	ft_test(ptrcount);
 }

@@ -64,6 +64,7 @@ void ft_send_signal(pid_t pid, char *str)
 		else if (killtest == -1)
 			printf("Signal failed.\n");
 		killtest = 1;
+		sleep(1);
 	}
 }
 
