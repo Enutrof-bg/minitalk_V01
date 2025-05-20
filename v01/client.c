@@ -28,6 +28,8 @@ char *ft_call_bit(unsigned char c)
 
 	i = 0;
 	bit = malloc(sizeof(char) * (8 + 1));
+	if (!bit)
+		return (NULL);
 	while (i < 8)
 	{
 		bit[i] = '0';
@@ -51,20 +53,21 @@ void ft_send_signal(pid_t pid, char *str)
 		if (str[i] == '0')
 		{
 			killtest = kill(pid, SIGUSR1);
-			printf("%c\n", str[i]);
+			// printf("%c\n", str[i]);
 		}
 		else if (str[i] == '1')
 		{
 			killtest = kill(pid, SIGUSR2);
-			printf("%c\n", str[i]);
+			// printf("%c\n", str[i]);
 		}
 		i++;
-		if (killtest == 0)
-			printf("Signal sent.\n");
-		else if (killtest == -1)
-			printf("Signal failed.\n");
+		// if (killtest == 0)
+		// 	printf("Signal sent.\n");
+		// else if (killtest == -1)
+		// 	printf("Signal failed.\n");
 		killtest = 1;
-		sleep(1);
+		// sleep(1);
+		usleep(1000);
 	}
 }
 
@@ -72,17 +75,22 @@ int main(int argc, char **argv)
 {
 	pid_t pidserver = 0;
 	char *bit;
-	// int i = 0;
+	int i;
+
+	i = 0;
 	// int killtest = 0;
 	// printf("%d\n", ft_power(2, 8));
-	if (argc >= 2)
+	if (argc >= 3)
 	{
 		pidserver = ft_atoi(argv[1]);
 		printf("%d\n", pidserver);
-		// while (argv[2])
-		bit = ft_call_bit('j');
-		ft_send_signal(pidserver, bit);
-		free(bit);
+		while (argv[2][i])
+		{
+			bit = ft_call_bit(argv[2][i]);
+			ft_send_signal(pidserver, bit);
+			free(bit);
+			i++;
+		}
 		// killtest = kill(pidserver, SIGUSR1);
 		// if (killtest == 0)
 		// 	printf("Signal sent.");

@@ -42,7 +42,6 @@ int ft_convert(char *str)
 			i++;
 		}
 	}
-	printf("%d\n", count);
 	return (count);
 }
 
@@ -65,26 +64,28 @@ void ft_print(int signum)
 	}
 	i++;
 	bit[8] = '\0';
-	printf("signum :%d\n", signum);
-	printf("bit :%s\n", bit);
+	// printf("signum :%d\n", signum);
+	// printf("bit :%s\n", bit);
 	if (i == 8)
 	{
+		// printf("%s\n", bit);
 		count = ft_convert(bit);
 		ft_putchar(count);
+		i = 0;
+		count = 0;
 	}
 
 }
 
 int main()
 {
-	signal(SIGINT, signal_handler);
-	signal(SIGTERM, signal_term);
-	signal(SIGUSR1, ft_print);
-	signal(SIGUSR2, ft_print);
+	// signal(SIGUSR1, ft_print);
+	// signal(SIGUSR2, ft_print);
+
+	pid_t pidserver = getpid();
+	printf("SERVER PID : %d\n", pidserver);
 	while (1)
 	{
-		pid_t pidserver = getpid();
-		printf("SERVER PID : %d\n", pidserver);
 		// kill(pidserver, SIGUSR1);
 		signal(SIGUSR1, ft_print);
 		signal(SIGUSR2, ft_print);
