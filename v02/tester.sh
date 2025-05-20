@@ -1,4 +1,11 @@
 #!/bin/zsh
+#
+#./tester.sh <your server PID> [options]
+
+#Options:
+#  -m      Mandatory part
+#  -b      Execution of bonus part (All unicode)
+#  -[0-6]  Execution of special tests
 
 PATH_TO_CLIENT="/home/kevwang/Desktop/gitenutrofbg/cercle3/minitalk/minitalkv01/v02/client"
 

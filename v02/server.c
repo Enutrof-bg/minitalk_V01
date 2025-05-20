@@ -39,12 +39,7 @@ void ft_print(int signum)
 	static char bit[9];
 	static int i = 0;
 	static int j = 0;
-	// if (!str)
-	// {
-	// 	str = ft_calloc(sizeof(char) * 500);
-	// 	if (!str)
-	// 		return ;
-	// }
+	
 	if (signum == 10)
 		bit[i] = '0';
 	else if (signum == 12)
