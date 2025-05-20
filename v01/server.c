@@ -12,16 +12,16 @@
 
 #include "minitalk.h"
 
-void	signal_handler(int signum)
-{
-	printf("SIGNUM :%d\n", signum);
-}
+// void	signal_handler(int signum)
+// {
+// 	printf("SIGNUM :%d\n", signum);
+// }
 
-void	signal_term(int signum)
-{
-	printf("term :%d\n", signum);
-	// kill(pidserver);
-}
+// void	signal_term(int signum)
+// {
+// 	printf("term :%d\n", signum);
+// 	// kill(pidserver);
+// }
 
 int ft_convert(char *str)
 {
@@ -65,14 +65,19 @@ void ft_print(int signum)
 	i++;
 	bit[8] = '\0';
 	// printf("signum :%d\n", signum);
-	// printf("bit :%s\n", bit);
+	// printf("i :%d bit :%s\n",i, bit);
 	if (i == 8)
 	{
 		// printf("%s\n", bit);
 		count = ft_convert(bit);
 		ft_putchar(count);
-		i = 0;
 		count = 0;
+		while (i > 0)
+		{
+			bit[i] = '0';
+			i--;
+		}
+		// printf("i :%d bit :%s\n",i, bit);
 	}
 
 }
@@ -86,9 +91,7 @@ int main()
 	printf("SERVER PID : %d\n", pidserver);
 	while (1)
 	{
-		// kill(pidserver, SIGUSR1);
 		signal(SIGUSR1, ft_print);
 		signal(SIGUSR2, ft_print);
-		sleep(1);
 	}
 }

@@ -47,7 +47,7 @@ void ft_send_signal(pid_t pid, char *str)
 
 	i = 0;
 	killtest = 1;
-	printf("%s\n", str);
+	// printf("%s\n", str);
 	while (str[i])
 	{
 		if (str[i] == '0')
@@ -67,7 +67,7 @@ void ft_send_signal(pid_t pid, char *str)
 		// 	printf("Signal failed.\n");
 		killtest = 1;
 		// sleep(1);
-		usleep(1000);
+		usleep(100);
 	}
 }
 

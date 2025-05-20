@@ -66,11 +66,6 @@ char *ft_call_bit(unsigned char c)
 	return (bit);
 }
 
-void ft_test(int *n)
-{
-	n = n + 1;
-	printf("%d\n", *n);
-}
 
 void ft_putchar(int c)
 {
@@ -88,6 +83,9 @@ int main()
 	// printf("%s\n", test2);
 	// free(test2);
 
-	ft_putchar(106);
+	// ft_putchar(106);
 	// write(1, &106, 1);
+
+	char happy[] = { 0xe2, 0x98, 0xba };
+	write(1, happy, 3);
 }
