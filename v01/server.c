@@ -83,7 +83,11 @@ void ft_print(int signum)
 			i--;
 		}
 		// printf("i :%d bit :%s\n",i, bit);
-		ft_pustr(str);
+		if (str[j] == '\0')
+		{
+			ft_pustr(str);
+			j = 0;
+		}
 	}
 	
 }
