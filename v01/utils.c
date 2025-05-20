@@ -12,9 +12,9 @@
 
 #include "minitalk.h"
 
-int ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -22,14 +22,14 @@ int ft_strlen(char *str)
 	return (i);
 }
 
-void ft_putchar(int c)
+void	ft_putchar(int c)
 {
 	write(1, &c, 1);
 }
 
-void ft_pustr(char *str)
+void	ft_pustr(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -37,13 +37,6 @@ void ft_pustr(char *str)
 		i++;
 	}
 	write(1, str, i);
-
-	// while (str[i])
-	// {
-	// 	write(1, &str[i], 1);
-	// 	i++;
-	// }
-
 }
 
 int	ft_atoi(const char *str)
@@ -71,9 +64,9 @@ int	ft_atoi(const char *str)
 	return (result * signe);
 }
 
-int ft_power(int nb, int power)
+int	ft_power(int nb, int power)
 {
-	int result;
+	int	result;
 
 	result = 1;
 	if (power < 0)

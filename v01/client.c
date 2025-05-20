@@ -12,7 +12,7 @@
 
 #include "minitalk.h"
 
-void 	ft_base(int c, int i, char *newstr)
+void	ft_base(int c, int i, char *newstr)
 {
 	if (c >= 2)
 	{
