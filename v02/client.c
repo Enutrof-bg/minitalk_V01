@@ -53,7 +53,7 @@ void	ft_send_signal(pid_t pid, char *str)
 		else if (str[i] == '1')
 			killtest = kill(pid, SIGUSR2);
 		i++;
-		usleep(10);
+		usleep(100);
 	}
 }
 
