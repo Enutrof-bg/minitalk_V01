@@ -21,5 +21,8 @@
 int	ft_atoi(const char *str);
 int ft_power(int nb, int power);
 void ft_putchar(int c);
+int ft_strlen(char *str);
+void ft_pustr(char *str);
+char	*ft_calloc(int size);
 
 #endif

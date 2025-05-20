@@ -25,7 +25,7 @@ OBJ2 = ${FILE2:.c=.o}
 
 EXEC = exec
 
-all:${EXEC} ${EXEC2}
+all:${EXEC}
 
 ${EXEC}: ${OBJ1} ${OBJ2}
 	${CC} ${CFLAGS} ${OBJ1} -o server

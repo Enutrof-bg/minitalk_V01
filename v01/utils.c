@@ -12,9 +12,38 @@
 
 #include "minitalk.h"
 
+int ft_strlen(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
 void ft_putchar(int c)
 {
 	write(1, &c, 1);
+}
+
+void ft_pustr(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		i++;
+	}
+	write(1, str, i);
+
+	// while (str[i])
+	// {
+	// 	write(1, &str[i], 1);
+	// 	i++;
+	// }
+
 }
 
 int	ft_atoi(const char *str)
@@ -57,4 +86,21 @@ int ft_power(int nb, int power)
 		power--;
 	}
 	return (result);
+}
+
+char	*ft_calloc(int size)
+{
+	int		i;
+	char	*newcalloc;
+
+	i = 0;
+	newcalloc = malloc(sizeof(char) * (size));
+	if (!newcalloc)
+		return (NULL);
+	while (i < size)
+	{
+		newcalloc[i] = 0;
+		i++;
+	}
+	return (newcalloc);
 }

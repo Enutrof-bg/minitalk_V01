@@ -66,12 +66,6 @@ char *ft_call_bit(unsigned char c)
 	return (bit);
 }
 
-
-void ft_putchar(int c)
-{
-	write(1, &c, 1);
-}
-
 int main()
 {
 	// printf("%d\n", 1 % 128);
@@ -85,7 +79,15 @@ int main()
 
 	// ft_putchar(106);
 	// write(1, &106, 1);
+	// printf("PID %d\n", getpid());
+	// char happy[] = { 0xe2, 0x98, 0xba };
+	// write(1, happy, 3);
 
-	char happy[] = { 0xe2, 0x98, 0xba };
-	write(1, happy, 3);
+	// pause();
+
+	// // happy[] = { 0xe2, 0x98, 0xba };
+	// write(1, happy, 3);
+
+	char *test = "Bonjour";
+	ft_pustr(test);
 }

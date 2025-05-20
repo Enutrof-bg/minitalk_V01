@@ -67,7 +67,7 @@ void ft_send_signal(pid_t pid, char *str)
 		// 	printf("Signal failed.\n");
 		killtest = 1;
 		// sleep(1);
-		usleep(100);
+		usleep(10);
 	}
 }
 
@@ -76,6 +76,7 @@ int main(int argc, char **argv)
 	pid_t pidserver = 0;
 	char *bit;
 	int i;
+	// int len;
 
 	i = 0;
 	// int killtest = 0;
@@ -84,6 +85,7 @@ int main(int argc, char **argv)
 	{
 		pidserver = ft_atoi(argv[1]);
 		printf("%d\n", pidserver);
+		// len = ft_strlen(argv[2][i]);
 		while (argv[2][i])
 		{
 			bit = ft_call_bit(argv[2][i]);

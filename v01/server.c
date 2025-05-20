@@ -48,20 +48,20 @@ int ft_convert(char *str)
 void ft_print(int signum)
 {
 	int count;
-	// int *ptrcount;
-
-	// count = 0;
-	// ptrcount = &count;
+	static char str[500];
 	static char bit[9];
 	static int i = 0;
+	static int j = 0;
+	// if (!str)
+	// {
+	// 	str = ft_calloc(sizeof(char) * 500);
+	// 	if (!str)
+	// 		return ;
+	// }
 	if (signum == 10)
-	{
 		bit[i] = '0';
-	}
 	else if (signum == 12)
-	{
 		bit[i] = '1';
-	}
 	i++;
 	bit[8] = '\0';
 	// printf("signum :%d\n", signum);
@@ -70,7 +70,12 @@ void ft_print(int signum)
 	{
 		// printf("%s\n", bit);
 		count = ft_convert(bit);
-		ft_putchar(count);
+		// printf("%c\n", (char)count);
+		str[j] = (char)count;
+		// printf("%c\n", str[j]);
+		// ft_pustr(str);
+		j++;
+		// ft_putchar(count);
 		count = 0;
 		while (i > 0)
 		{
@@ -78,8 +83,9 @@ void ft_print(int signum)
 			i--;
 		}
 		// printf("i :%d bit :%s\n",i, bit);
+		ft_pustr(str);
 	}
-
+	
 }
 
 int main()
