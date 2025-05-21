@@ -112,6 +112,7 @@ void ft_print(int signum, siginfo_t *info, void *truc)
 	{
 		if (!str)
 		{
+			printf(">>> ALLOC for %d bytes\n", len + 1);
 			str = malloc(sizeof(char) * (len + 1));
 			if (!str)
 			{
@@ -145,7 +146,7 @@ void ft_print(int signum, siginfo_t *info, void *truc)
 			// count = 0;
 			while (i > 0)
 			{
-				bit[i] = '0';
+				bit[i] = 0;
 				i--;
 			}
 			// printf("i :%d bit :%s\n",i, bit);

@@ -90,8 +90,8 @@ void ft_print(int signum, siginfo_t *info, void *truc)
 	static int j = 0;
 	static int len = -1;
 	// char *result;
-
-	truc = NULL;
+	if (truc)
+		truc = NULL;
 	if (len == -1)
 	{
 		ft_len(signum, &len);
