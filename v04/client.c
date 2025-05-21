@@ -215,9 +215,7 @@ int	main(int argc, char **argv)
 	pid_t	pidserver;
 	// char	*bit;
 	int		i;
-	struct sigaction sig;
 
-	sig.sa_sigaction = ft_receive;
 	i = 0;
 	if (argc >= 3)
 	{
@@ -234,10 +232,16 @@ int	main(int argc, char **argv)
 		// {
 		// 	bit = ft_call_bit(argv[2][i]);
 		// 	// printf("%s\n", bit);
+		while (argv[2][i])
+		{
+			bit = ft_call_bit(argv[2][i]);
+			ft_send_signal(pidserver, bit);
+			free(bit);
+			i++;
+		}
 
-
-		ft_send_signal(pidserver, argv[2]);
-
+		// ft_send_signal(pidserver, argv[2]);
+		
 
 		// 	free(bit);
 		// 	i++;
@@ -250,10 +254,4 @@ int	main(int argc, char **argv)
 	}
 	// sigaction(SIGUSR1, &sig, NULL);
 	// sigaction(SIGUSR2, &sig, NULL);
-	while (1)
-	{
-		// pause();
-		sigaction(SIGUSR1, &sig, NULL);
-		sigaction(SIGUSR2, &sig, NULL);
-	}
 }
