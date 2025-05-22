@@ -12,6 +12,9 @@
 
 #include "minitalk.h"
 
+// static char *str_copie = NULL;
+static char *bit = NULL;
+
 void	ft_base(int c, int i, char *newstr)
 {
 	if (c >= 2)
@@ -62,18 +65,18 @@ char	*ft_call_len(int c)
 void	ft_send_len(pid_t pid, char *str)
 {
 	// int	killtest;
-	static char *str_copie;
+	static char *str_copie_len;
 	static int i = 0;
 	// static int j = 0;
 	// static char *bit;
 
-	if (!str_copie)
-		str_copie = str;
+	if (!str_copie_len)
+		str_copie_len = ft_strdup(str);
 	// if (!bit)
-	// 	bit = ft_call_len(str_copie[j]);
+	// 	bit = ft_call_len(str_copie_len[j]);
 
 	// write(1,"copie:",6);
-	// write(1, str_copie, ft_strlen(str_copie));
+	// write(1, str_copie_len, ft_strlen(str_copie_len));
 	// write(1, "\n", 1);
 
 
@@ -81,11 +84,17 @@ void	ft_send_len(pid_t pid, char *str)
 	// write(1,":bit\n",5);
 	if (i < 32)
 	{
-		if (str_copie[i] == '0')
+		if (str_copie_len[i] == '0')
 			kill(pid, SIGUSR1);
-		else if (str_copie[i] == '1')
+		else if (str_copie_len[i] == '1')
 			kill(pid, SIGUSR2);
 		i++;
+	}
+	if (i == 32)
+	{
+		// clean = 1;
+		free(str_copie_len);
+		str_copie_len = NULL;
 	}
 	// if (i == 32)
 	// {
@@ -94,9 +103,9 @@ void	ft_send_len(pid_t pid, char *str)
 	// 	i = 0;
 	// 	j++;
 	// 	free(bit);
-	// 	bit = ft_call_bit(str_copie[j]);
+	// 	bit = ft_call_bit(str_copie_len[j]);
 	// }
-	// if (!str_copie[j])
+	// if (!str_copie_len[j])
 	// {
 	// 	free(bit);
 	// 	bit = ft_call_bit(0);
@@ -119,7 +128,7 @@ void	ft_send_signal(pid_t pid, char *str)
 	static char *str_copie = NULL;
 	static int i = 0;
 	static int j = 0;
-	static char *bit = NULL;
+	// static char *bit = NULL;
 	static int clean = 0;
 
 	if (!str_copie && clean == 0)
@@ -147,7 +156,14 @@ void	ft_send_signal(pid_t pid, char *str)
 			kill(pid, SIGUSR2);
 		i++;
 	}
-	if (i == 8)
+	// if (clean == 1 && i == 8)
+	// {
+	// 	str_copie = NULL;
+	// 	free(bit);
+	// 	bit = NULL;
+	// 	return ;
+	// }
+	if (i == 8 && clean == 0)
 	{
 		// write(1,bit,8);
 		// write(1,"\n",1);
@@ -166,12 +182,7 @@ void	ft_send_signal(pid_t pid, char *str)
 		i = 0;
 		clean = 1;
 	}
-	if (clean == 1 && i == 8)
-	{
-		str_copie = NULL;
-		free(bit);
-		bit = NULL;
-	}
+
 	// i = 0;
 	// while (str[i])
 	// {
@@ -209,7 +220,10 @@ void	ft_receive(int signum, siginfo_t *info, void *truc)
 	else if (signum == SIGUSR2)
 	{
 		test = 0;
-		// printf("sortie");
+		// free(str_copie);
+		// str_copie = NULL;
+		free(bit);
+		bit = NULL;
 		exit(0);
 	}
 }
@@ -223,6 +237,8 @@ int	main(int argc, char **argv)
 	sig.sa_flags = SA_SIGINFO;
 	sigemptyset(&sig.sa_mask);
 	sig.sa_sigaction = ft_receive;
+	sigaction(SIGUSR1, &sig, NULL);
+	sigaction(SIGUSR2, &sig, NULL);
 	// i = 0;
 	if (argc >= 3)
 	{
@@ -235,6 +251,7 @@ int	main(int argc, char **argv)
 		// printf("len_bit:%s\n", len_bit);
 
 		ft_send_len(pidserver, len_bit);
+		free(len_bit);
 		// while (argv[2][i])
 		// {
 		// 	bit = ft_call_bit(argv[2][i]);
@@ -253,8 +270,7 @@ int	main(int argc, char **argv)
 		// ft_send_signal(pidserver, bit);
 		// free(bit);
 	}
-	sigaction(SIGUSR1, &sig, NULL);
-	sigaction(SIGUSR2, &sig, NULL);
+	
 	while (1)
 	{
 		pause();
