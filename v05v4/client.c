@@ -159,7 +159,7 @@ int	main(int argc, char **argv)
 	sig.sa_sigaction = ft_receive;
 	sigaction(SIGUSR1, &sig, NULL);
 	sigaction(SIGUSR2, &sig, NULL);
-	if (argc >= 3)
+	if (argc == 3)
 	{
 		pidserver = ft_atoi(argv[1]);
 		// ft_putnbr(pidserver);
@@ -172,5 +172,5 @@ int	main(int argc, char **argv)
 			pause();
 		}
 	}
-	
+	return (0);
 }
