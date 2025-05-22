@@ -72,7 +72,7 @@ void	ft_len(int signum, int *len)
 
 void	ft_print(int signum, siginfo_t *info, void *truc)
 {
-	int			count;
+	// int			count;
 	static char	*str = NULL;
 	static char	bit[9];
 	static int	i = 0;
@@ -92,9 +92,7 @@ void	ft_print(int signum, siginfo_t *info, void *truc)
 		{
 			str = malloc(sizeof(char) * (len + 1));
 			if (!str)
-			{
 				exit(1);
-			}
 		}
 		if (signum == SIGUSR1)
 			bit[i] = '0';
@@ -104,19 +102,10 @@ void	ft_print(int signum, siginfo_t *info, void *truc)
 		if (i == 8)
 		{
 			bit[8] = '\0';
-			count = ft_convert(bit);
-			str[j] = (char)count;
-			
-			// while (i > 0)
-			// {
-			// 	bit[i] = '0';
-			// 	i--;
-			// }
+			str[j] = (char)ft_convert(bit);
 			i = 0;
-			// if (count == '\0' || j >= len)
 			if (str[j] == '\0' || j >= len)
 			{
-				// str[j] = '\0';
 				ft_pustr(str);
 				j = 0;
 				len = -1;
