@@ -72,7 +72,6 @@ void	ft_len(int signum, int *len)
 
 void	ft_print(int signum, siginfo_t *info, void *truc)
 {
-	// int			count;
 	static char	*str = NULL;
 	static char	bit[9];
 	static int	i = 0;
@@ -126,7 +125,7 @@ int	main(void)
 	struct sigaction	sig;
 
 	pidserver = getpid();
-	printf("SERVER PID : %d\n", pidserver);
+	ft_putnbr(pidserver);
 	sig.sa_flags = SA_SIGINFO;
 	sigemptyset(&sig.sa_mask);
 	sig.sa_sigaction = ft_print;

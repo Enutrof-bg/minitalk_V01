@@ -162,14 +162,15 @@ int	main(int argc, char **argv)
 	if (argc >= 3)
 	{
 		pidserver = ft_atoi(argv[1]);
-		printf("%d\n", pidserver);
+		// ft_putnbr(pidserver);
 		len_bit = ft_call_len(ft_strlen(argv[2]));
 		ft_send_len(pidserver, len_bit);
 		free(len_bit);
 		ft_send_signal(pidserver, argv[2]);
+		while (1)
+		{
+			pause();
+		}
 	}
-	while (1)
-	{
-		pause();
-	}
+	
 }

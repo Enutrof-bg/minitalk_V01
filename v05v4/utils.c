@@ -93,3 +93,17 @@ char	*ft_strdup(char *s)
 	newstr[i] = '\0';
 	return (newstr);
 }
+
+void	ft_putnbr(int nb)
+{
+	if (nb == -2147483648)
+		write(1, "-2147483648", 11);
+	if (nb < 0)
+	{
+		nb = nb * -1;
+		write(1, "-", 1);
+	}
+	if (nb > 9)
+		ft_putnbr(nb / 10);
+	write(1, &"0123456789"[nb % 10], 1);
+}
