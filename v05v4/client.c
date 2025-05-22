@@ -12,8 +12,6 @@
 
 #include "minitalk.h"
 
-static char	*bit = NULL;
-
 void	ft_base(int c, int i, char *newstr)
 {
 	if (c >= 2)
@@ -83,44 +81,56 @@ void	ft_send_len(pid_t pid, char *str)
 	}
 }
 
+void ft_reset(char **bit, int *i)
+{
+	*i = 0;
+	free(*bit);
+	*bit = NULL;
+}
+
+void ft_send_bit(pid_t pid, char *bit, int i)
+{
+	if (bit[i] == '0')
+		kill(pid, SIGUSR1);
+	else if (bit[i] == '1')
+		kill(pid, SIGUSR2);
+}
+
+void ft_initialize(char *str, char **str_copie, char **bit)
+{
+	*str_copie = str;
+	if (!*bit)
+		*bit = ft_call_bit(*str_copie[0]);
+	// *str_copie = str_copie[1];
+}
+
 void	ft_send_signal(pid_t pid, char *str)
 {
 	static char	*str_copie = NULL;
 	static int	i = 0;
-	static int	j = 0;
+	static int	j = 1;
 	static int	clean = 0;
+	static char	*bit = NULL;
 
 	if (!str_copie && clean == 0)
-	{
-		str_copie = str;
-		if (!bit)
-			bit = ft_call_bit(str_copie[j]);
-	}
+		ft_initialize(str, &str_copie, &bit);
 	else
 	{
 		if (i < 8)
+			ft_send_bit(pid, bit, i++);
+		if (i == 8)
 		{
-			if (bit[i] == '0')
-				kill(pid, SIGUSR1);
-			else if (bit[i] == '1')
-				kill(pid, SIGUSR2);
-			i++;
-		}
-		if (i == 8 && clean == 0)
-		{
-			i = 0;
-			j++;
-			free(bit);
-			bit = NULL;
-			bit = ft_call_bit(str_copie[j]);
-		}
-		if (!str_copie[j] && clean == 0)
-		{
-			free(bit);
-			bit = NULL;
-			bit = ft_call_bit(0);
-			i = 0;
-			clean = 1;
+			ft_reset(&bit, &i);
+			if (clean == 0)
+			{
+				if (str_copie[j])
+					bit = ft_call_bit(str_copie[j++]);
+				else
+				{
+					bit = ft_call_bit(0);
+					clean = 1;
+				}
+			}
 		}
 	}
 }
@@ -142,8 +152,6 @@ void	ft_receive(int signum, siginfo_t *info, void *truc)
 	else if (signum == SIGUSR2)
 	{
 		test = 0;
-		free(bit);
-		bit = NULL;
 		exit(0);
 	}
 }

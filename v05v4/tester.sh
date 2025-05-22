@@ -1,4 +1,4 @@
-#!/bin/zsh
+
 #
 #./tester.sh <your server PID> [options]
 
@@ -7,8 +7,8 @@
 #  -b      Execution of bonus part (All unicode)
 #  -[0-6]  Execution of special tests
 
-PATH_TO_CLIENT="/home/kevwang/Desktop/gitenutrofbg/cercle3/minitalk/minitalkv03/v05v4/client"
-# PATH_TO_CLIENT="/home/guest/Desktop/githubdir/cercle3/minitalk/minitalkv3/v05v2/client"
+# PATH_TO_CLIENT="/home/kevwang/Desktop/gitenutrofbg/cercle3/minitalk/minitalkv03/v05v4/client"
+PATH_TO_CLIENT="/home/guest/Desktop/githubdir/cercle3/minitalk/minitalkv4/v05v4/client"
 
 # Colors
 Black='\e[0;30m'
