@@ -32,7 +32,7 @@ int	ft_convert(char *str)
 	return (count);
 }
 
-int ft_len_count(char *str)
+int	ft_len_count(char *str)
 {
 	int	i;
 	int	count;
@@ -52,144 +52,90 @@ int ft_len_count(char *str)
 	return (count);
 }
 
-void ft_len(int signum, int *len)
+void	ft_len(int signum, int *len)
 {
-	static char bit[33];
-	static int i = 0;
-	// int test;
-	// char *result;
+	static char	bit[33];
+	static int	i = 0;
 
 	if (signum == SIGUSR1)
 		bit[i] = '0';
 	else if (signum == SIGUSR2)
 		bit[i] = '1';
 	i++;
-	
-	// write(1, "test:", 5);
-	// write(1, &bit[0], 32);
-	// write(1, "\n", 1);
-	// test = ft_len_count(bit);
-	// result = ft_itoa(test);
-	// write(1, result, ft_strlen(result));
 	if (i == 32)
 	{
 		bit[32] = '\0';
 		*len = ft_len_count(bit);
 		i = 0;
-		// result = ft_itoa(*len);
-		// write(1, "len:", 4);
-		// write(1, result, ft_strlen(result));
 	}
 }
 
-void ft_print(int signum, siginfo_t *info, void *truc)
+void	ft_print(int signum, siginfo_t *info, void *old)
 {
 	int count;
-	static char *str = NULL;
-	static char bit[9];
-	static int i = 0;
-	static int j = 0;
-	static int len = -1;
-	// char *result;
+	static char	*str = NULL;
+	static char	bit[9];
+	static int	i = 0;
+	static int	j = 0;
+	static int	len = -1;
 
-	if (truc)
-		truc = NULL;
-	// (void)truc;
+	if (old)
+		old = NULL;
 	if (len == -1)
 	{
 		ft_len(signum, &len);
-
-
-		// result = ft_itoa(len);
-		// write(1, "len:", 4);
-		// write(1, result, ft_strlen(result));
-		// write(1,"\n",1);
-
-
 		kill(info->si_pid, SIGUSR1);
 	}
-	else 
+	else
 	{
 		if (!str)
 		{
-			// printf(">>> ALLOC for %d bytes\n", len + 1);
 			str = malloc(sizeof(char) * (len + 1));
 			if (!str)
-			{
 				exit(1);
-			}
 		}
 		if (signum == SIGUSR1)
 			bit[i] = '0';
 		else if (signum == SIGUSR2)
 			bit[i] = '1';
 		i++;
-		
-		// printf("signum :%d\n", signum);
-		// printf("i :%d bit :%s\n",i, bit);
 		if (i == 8)
 		{
 			bit[8] = '\0';
-			// printf("%s\n", bit);
-
-
-			// write(1,bit,8);
-			// write(1,"\n",1);
-
 			count = ft_convert(bit);
-			// printf("%c\n", (char)count);
-			str[j] = (char)count;
-			// printf("%c\n", str[j]);
-			// ft_pustr(str);
+			str[j] = count;
 			j++;
-			// ft_putchar(count);
-			// count = 0;
-			while (i > 0)
-			{
-				bit[i] = 0;
-				i--;
-			}
-			// printf("i :%d bit :%s\n",i, bit);
-			// if (str[j] == '\0')
+			i = 0;
 			if (count == '\0' || j >= len)
 			{
-				str[j] = '\0';
-				ft_pustr(str);
+				str[len] = '\0';
+				ft_putstr(str);
 				j = 0;
 				len = -1;
 				free(str);
 				str = NULL;
-				// i = 0;
-				// printf("%d\n", info->si_pid);
 				kill(info->si_pid, SIGUSR2);
-				return ; 
+				return ;
 			}
 		}
 		kill(info->si_pid, SIGUSR1);
 	}
-	
 }
 
-int main()
+int	main(void)
 {
-	pid_t pidserver = getpid();
-	printf("SERVER PID : %d\n", pidserver);
-	// signal(SIGUSR1, ft_print);
-	// signal(SIGUSR2, ft_print);
-	struct sigaction sig;
+	pid_t				pidserver;
+	struct sigaction	sig;
 
+	pidserver = getpid();
+	ft_putstr(ft_itoa(pidserver));
 	sig.sa_flags = SA_SIGINFO;
 	sigemptyset(&sig.sa_mask);
 	sig.sa_sigaction = ft_print;
-	
 	sigaction(SIGUSR1, &sig, NULL);
 	sigaction(SIGUSR2, &sig, NULL);
-	// signal(SIGUSR1, ft_print);
-	// signal(SIGUSR2, ft_print);
 	while (1)
 	{
 		pause();
-		// sigaction(SIGUSR1, &sig, NULL);
-		// sigaction(SIGUSR2, &sig, NULL);
 	}
 }

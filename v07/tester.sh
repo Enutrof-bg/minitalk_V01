@@ -7,7 +7,7 @@
 #  -b      Execution of bonus part (All unicode)
 #  -[0-6]  Execution of special tests
 
-PATH_TO_CLIENT="/home/kevwang/Desktop/gitenutrofbg/cercle3/minitalk/minitalkv03/v06/client"
+PATH_TO_CLIENT="/home/kevwang/Desktop/gitenutrofbg/cercle3/minitalk/minitalkv03/v07/client"
 # PATH_TO_CLIENT="/home/guest/Desktop/githubdir/cercle3/minitalk/minitalkv3/v05/client"
 
 # Colors
