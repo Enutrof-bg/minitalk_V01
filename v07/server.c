@@ -72,7 +72,7 @@ void	ft_len(int signum, int *len)
 
 void	ft_print(int signum, siginfo_t *info, void *old)
 {
-	int count;
+	int			count;
 	static char	*str = NULL;
 	static char	bit[9];
 	static int	i = 0;
@@ -129,6 +129,7 @@ int	main(void)
 
 	pidserver = getpid();
 	ft_putstr(ft_itoa(pidserver));
+	ft_putstr("\n");
 	sig.sa_flags = SA_SIGINFO;
 	sigemptyset(&sig.sa_mask);
 	sig.sa_sigaction = ft_print;
